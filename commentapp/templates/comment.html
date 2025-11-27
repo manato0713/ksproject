@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}全ての武器{% endblock %}
+
+<!-- Navigation-->
+{% block Nav %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#">{% block title2 %}トップページ▲{% endblock %}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page"
+                            href="{% url 'splapp:index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'comment:comeiti' %}">コメントを見る
+                    </a></li>
+
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, .1);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</header>
+
+{% endblock %}
+<!-- Header-->
+
+<!-- Section-->
+
+{% block Section %}
+
+
+
+
+
+
+
+
+
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+         
+          <div class="container">
+            <!-- 行を配置 -->
+            <div class="row">
+                <!-- 列の左右に余白offset-2を入れる -->
+                <div class="col offset-2">
+                    <!-- ファイルをアップロードする場合は
+                      enctype="multipart/form-data"が必要 -->
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table>
+                           
+                            <tr>
+                                <th>ニックネーム</th>
+                                <td>{{ form.title }}</td>
+                            </tr>
+                            <tr>
+                                <th>コメント</th>
+                                <td>{{ form.comment }}</td>
+                            </tr>
+                            
+                        </table>
+                        <hr>
+                        <button type="submit">投稿する</button>
+                    </form>
+                </div>
+               </div>
+              </div>
+
+        
+         
+
+    </section>
+
+
+
+    {% endblock %}
+
+
+
+
+
+
+   
+
+
+
+  

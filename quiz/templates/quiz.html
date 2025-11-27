@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}全ての武器{% endblock %}
+
+        <!-- Navigation-->
+{% block Nav %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#">{% block title2 %}トップページ▲{% endblock %}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        href="{% url 'splapp:index' %}">Home</a></li>
+                
+                
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<style>
+ header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, .1);
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+ }
+</style>
+</header>
+
+{% endblock %}
+        <!-- Header-->
+        
+        <!-- Section-->
+
+{% block Section %}
+<body class="abc">
+    <style>
+        .abc {
+            background: linear-gradient(to right, rgb(193, 201, 193),rgb(108, 164, 108));
+
+        }
+    </style>
+
+    
+
+    
+
+    
+
+
+
+    <section class="py-5">
+        
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            <p class="toi">問:以下の２つの武器のうち射程が長い武器はどちらでしょうか？(最大射程)</p>
+            <style>
+                .toi{
+                    font-size: 25px;
+                }
+            </style>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for record in object_list %}
+                <div class="col mb-5">
+                    
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{record.image1.url}}" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{record.user}}</h5>
+                                <!-- Product price-->
+                               
+                                
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        
+                    </div>
+                </div>
+               
+                
+               
+    
+            {% endfor %}
+            </div>
+        
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="d-flex justify-content-center gap-2">
+        
+                <div class="text-center" style="background-color: white;"> <a class="btn btn-outline-dark mt-auto"
+                        href="{% url 'quiz:kaisetu' %}">答えを見る</a></div>
+            </div>
+        </div>
+        
+    </section>
+    
+        
+
+
+
+{% endblock %}
+
+
+
+    
+

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}全ての武器{% endblock %}
+
+        <!-- Navigation-->
+{% block Nav %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#">{% block title2 %}トップページ▲{% endblock %}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        href="{% url 'splapp:index' %}">Home</a></li>
+                
+               
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<style>
+ header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, .1);
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+ }
+</style>
+</header>
+
+{% endblock %}
+        <!-- Header-->
+        
+        <!-- Section-->
+
+{% block Section %}
+<body  background="media/photos/Fau_P1TaIAAOWBo.jpg">
+    
+
+    
+
+    
+
+
+
+    <section class="py-5">
+        
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for record in object_list %}
+                <div class="col mb-5">
+                    
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{record.image1.url}}" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{record.user}}</h5>
+                                <div class="d-flex justify-content-center big text-danger mb-2">射程:{{record.title}}</div>
+                                <!-- Product price-->
+                                <div id ='{{record.title}}'>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        
+                    </div>
+                </div>
+                
+
+               
+                
+               
+    
+            {% endfor %}
+            
+            <script>
+                // すべての要素を取得
+                const elements = document.querySelectorAll("[id]");
+
+                // idを数値に変換して最大値を探す
+                idValue = null;
+                let maxElement = null;
+                let minElement = null;
+                let maxId = -Infinity;
+                let minId = Infinity
+                
+
+                elements.forEach(el => {
+                    const idValue = parseInt(el.id, 10);
+                    if (idValue > maxId) {
+                        maxId = idValue;
+                        maxElement = el;
+                    }
+                    if (idValue < minId){
+                        minId = idValue;
+                        minElement =el;
+
+                    }
+                });
+                
+
+                // 最大idの要素を変更
+                if (maxElement) {
+                    maxElement.textContent = "正解";
+                    maxElement.style.color = "green"; // 文字色を赤にする例
+                }
+                if(minElement){
+                    minElement.textContent = "不正解";
+                    minElement.style.color = "red"; // 文字色を赤にする例
+                }
+            </script>
+            </div>
+        
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+           <div class="d-flex justify-content-center gap-2">
+        
+            <div class="text-center" style="background-color: white;"><a class="btn btn-outline-dark mt-auto" href="{% url 'splapp:index' %}">Home</a></div>
+            <div class="text-center" style="background-color: white;"> <a class="btn btn-outline-dark mt-auto" href="{% url 'quiz:quiz' %}">もう一問解く</a></div>
+           </div>
+        </div>
+        
+    </section>
+
+
+
+{% endblock %}
+
+
+
+    
+

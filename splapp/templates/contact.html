@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock %}
+
+
+
+<!-- Navigation-->
+
+    
+
+{% block Nav %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        href="{% url 'splapp:index' %}">Home</a></li>
+                
+                <li class="nav-item"><a class="nav-link" href="#">お問い合わせ</a></li>
+            </ul>
+                    
+
+        </div>
+    </div>
+</nav>
+{% endblock %}
+<!-- Product section-->
+{% block Section %}
+
+<br>
+
+<main class="mb-4">
+    
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- 本文を変更 -->
+                <strong>
+                    このページを閲覧した感想やフィードバックを
+                    お聞かせください
+                    </strong>
+
+                <!-- フォームの送信が成功したときのメッセージを表示するためのコード -->
+                <!-- requestにmessagesオブジェクトが存在している場合 -->
+                {% if messages %}
+
+                <!-- 箇条書きのスタイルを無効にした<ul>タグでメッセージを出力 -->
+                <ul class="list-unstyled" style="list-style: none;">
+
+                    <!-- forでmessagesを取り出す -->
+                    {% for message in messages %}
+                    <!-- 
+                    if文 message.tagsが存在する場合は
+                    class属性にCSSのクラスを設定
+                    -->
+                    <li {%if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        <!-- messageに格納されているメッセージを出力 -->
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+
+                </ul>
+                {% endif %}
+
+                <!-- 以下、フォームを表示するためのコード -->
+                <div class="my-5">
+
+                    <!-- method="post"を追加 -->
+                    <form method="post">
+                        <!-- 
+                        CSRF対策のためのテンプレートタグ
+                        Cross-Site Request Forgery（クロスサイト・リクエスト・フォージェリ）
+                        ざっくり言うと：「ログイン中のユーザーに、意図しない操作をさせる攻撃」
+                    -->
+                        {% csrf_token %}
+
+                        <!-- formで定義されているフィールドの値を取り出す -->
+                        <!-- 
+                    FormView の中では：
+                    1. form_class を使ってフォームを作る
+                    2. get_context_data() メソッドでテンプレートに form を渡す
+
+                    def get(self, request, *args, **kwargs):
+                        form = self.get_form()  # ← ここで form_class から form を作る
+                        return self.render_to_response(self.get_context_data(form=form))
+
+                    def get_form(self):
+                        return self.form_class(**self.get_form_kwargs())
+
+                    # 自動的にこういう処理がされてるイメージ
+                    form = ContactForm()
+                    context = {'form': form}
+                    return render(request, 'contact.html', context)
+                    -->
+
+                        {% for field in form %}
+                        <div class="form-floating">
+                            <div class="form-group floating-label-form-group controls">
+                                <!-- 
+                            <label>タグを生成
+                            ContactFormのlabel変数の内容を表示
+                            -->
+                                {{ field.label_tag}}
+                                <!-- フィールドの設定値を<input>タグで出力-->
+                                {{ field }}
+                                <!-- <p>を追加-->
+                                <p class="help-block text-danger"></p>
+                                <!-- <input>タグを削除 -->
+                                <!-- <label>～</label>タグを削除 -->
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- forループここまで -->
+
+                        <!-- <div class="control-group">～</div>までの3ブロックを削除 -->
+
+                        <br>
+                        <!-- 送信用のボタン -->
+                        <button type="submit" class="btn btn-primary" id="sendMessageButton">送信</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+</main>
+
+{% endblock %}
+
+
+    
+

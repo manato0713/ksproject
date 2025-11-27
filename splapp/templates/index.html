@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock %}
+
+
+
+<!-- Navigation-->
+{% block Nav %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        href="{% url 'splapp:index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'splapp:buki' %}">武器一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'comment:comeiti' %}">コメント</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'quiz:quiz' %}">クイズ</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'splapp:contact' %}">お問い合わせ</a></li>
+            </ul>
+                    
+
+        </div>
+    </div>
+</nav>
+{% endblock %}
+<!-- Product section-->
+ {% block Section %}
+<body class="abcde">
+    <style>
+     .abcde{
+        margin: 0;
+        background-image:url("media/photos/FpItcAOaQAEeFe9-1-1.jpeg");
+        background-repeat: no-repeat;   /* 繰り返しを止める */
+        background-position: center;    /* 画像を中央に配置 */
+        background-size: cover;         /* 画面全体にフィットさせる */
+
+
+        
+     }
+
+    </style>
+
+
+ 
+    
+ 
+     
+  
+ 
+ <section class="py-5">
+    <div class="container px-4 px-lg-5 my-5" >
+        {% for record in object_list %}
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+
+                <h1 class="display-5 fw-bolder"><font color = 'orange'>{{record.user}}</font></h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through"></span>
+                   <br>
+                   <br>
+                   
+                    <h3><span><font color='darkgreen'>{{record.comment}}</font></h3>
+                    </span>
+                    
+                </div>
+                <p class="kaigyo"></p><br>
+
+                </p>
+
+            </div>
+        </div>
+    {% endfor %}
+    
+    </div>
+    </div>
+
+ </section>
+<!-- Related items section-->
+
+    
+</body>
+ {% endblock %}
+
+
+
+
+
+    
+

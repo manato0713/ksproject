@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}全ての武器{% endblock %}
+
+<!-- Navigation-->
+{% block Nav %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#">{% block title2 %}トップページ▲{% endblock %}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page"
+                            href="{% url 'splapp:index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'comment:comment' %}">コメントを書く</a></li>
+
+
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, .1);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</header>
+
+{% endblock %}
+<!-- Header-->
+
+<!-- Section-->
+
+{% block Section %}
+
+<section class="py-5">
+<div class="container px-4 px-lg-5 py-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            {% for record in comment %}
+
+            <!-- Post preview-->
+            <div class="post-preview">
+                
+                    <h3 class="post-title">{{record.title}}</h3>
+                    <!-- truncatechars は表示する文字数を制限 -->
+                    <p class="post-subtitle">{{record.comment}}<p>
+                
+                
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+
+            {% endfor %}
+
+            <!-- Pager-->
+            {% include "pagination.html" %}
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+{% endblock %}

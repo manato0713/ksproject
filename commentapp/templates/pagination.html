@@ -1,0 +1,58 @@
+<!-- ページネーションのアイコンを左右中央に配置 -->
+<ul class="pagination" style="justify-content:center">
+    <!-- 
+    前のページに戻る
+    1ページ目以外の時だけ表示
+
+    has_previous　前のページ存在しますか？
+    -->
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link"
+            href="?page={{ page_obj.previous_page_number }}"
+            aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    {% endif %}
+    <!--
+    -->
+    {% for num in page_obj.paginator.page_range %}
+        <!-- 現在いるページに該当するか -->
+        {% if page_obj.number == num %}
+        <!-- リンクさせる必要がないのでaタグはなし -->
+        <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+        </li>
+        
+        {% else %}
+        <!-- 
+        今いるページから別のページ番号にリンク 
+        なのでaタグある
+        -->
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+    <!-- 
+    次のページに進む
+    最後のページ以外の時だけ表示
+
+    has_next　次のページは存在するの？
+    -->
+    {% if page_obj.has_next %}
+    <!--
+    存在するならリンクさせる必要がある
+    aタグが存在する
+    -->
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number }}"
+           aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endif %}
+</ul>
+

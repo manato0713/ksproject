@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}{% endblock %}
+
+        <!-- Navigation-->
+{% block Nav %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#">{% block title2 %}トップページ▲{% endblock %}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        href="{% url 'splapp:index' %}">Home</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">武器の種類を選択</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'splapp:buki' %}">すべての武器</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:syuta' %}">シューター</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:rora' %}">ローラー</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:tya' %}">チャージャー</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:suro' %}">スロッシャー</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:bura' %}">ブラスター</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:hude' %}">フデ</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:supin' %}">スピナー</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:manyu' %}">マニューバー</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:syeru' %}">シェルター</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:waipa' %}">ワイパー</a></li>
+                        <li><a class="dropdown-item" href="{% url 'splapp:sutori' %}">ストリンガー</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<style>
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, .1);
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+</header>
+{% endblock %}
+        <!-- Header-->
+        
+        <!-- Section-->
+
+{% block Section %}
+<body background="media/photos/wallhaven-9ml9e8.jpg">
+
+
+
+
+    <section class="py-5">
+        
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for record in object_list %}
+                <div class="col mb-5">
+                    
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{record.image1.url}}" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{record.user}}</h5>
+                                <!-- Product price-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    {% if record.title == '5' %}
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+
+                                    {% elif record.title == '4' %}
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+
+                                    {% elif record.title == '3' %}
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+
+                                    {% elif record.title == '2' %}
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                     
+                                    {% else %}
+                                    <div class="bi-star-fill"></div>
+
+                                    {% endif %}
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                           
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href={% url 'splapp:main' record.pk %}>性能を見る</a></div>
+                           
+                        </div>
+                    </div>
+                </div>
+               
+                
+               
+    
+            {% endfor %}
+            </div>
+        
+        </div>
+        
+    </section>
+</body>
+{% endblock %}
+
+
+
+    
+
